@@ -12,19 +12,24 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>            
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
 
-        <Label Grid.Row="0" Grid.Column="0" Content="Выберите директорию:" FontSize="16" FontWeight="Bold" />
-        <TextBox Grid.Row="1" Grid.Column="0" x:Name="txtDirectory" Padding="5" Margin="0,10,0,10" FontSize="14" />
-        <Button Grid.Row="1" Grid.Column="1" Content="Обзор..." x:Name="BtnSelectDirectory" Click="BtnSelectDirectory_Click" Padding="10,5" Margin="10,10,0,10" FontSize="14" Background="#B0C4DE" BorderBrush="#87CEFA" BorderThickness="2"/>
+        <StackPanel Grid.Row="1" Grid.Column="0" Orientation="Horizontal">
+            <RadioButton x:Name="singleFileRadio" Content="Один файл" IsChecked="True" Checked="RadioButtons_Checked" Margin="0,10,10,10" />
+            <RadioButton x:Name="directoryRadio" Content="Папка" Checked="RadioButtons_Checked" Margin="0,10,0,10" />
+        </StackPanel>
+        <TextBox Grid.Row="2" Grid.Column="0" x:Name="txtDirectory" Padding="5" Margin="0,10,0,10" FontSize="14" />
+        <Button Grid.Row="2" Grid.Column="1" Content="Обзор..." x:Name="BtnSelectDirectory" Click="BtnSelectDirectory_Click" Padding="10,5" Margin="10,10,0,10" FontSize="14" Background="#B0C4DE" BorderBrush="#87CEFA" BorderThickness="2"/>
 
-        <Label Grid.Row="2" Grid.Column="0" Content="Выберите голос:" FontSize="16" FontWeight="Bold" Margin="0,10,0,0" />
-        <ScrollViewer Grid.Row="3" Grid.Column="0" VerticalScrollBarVisibility="Auto" Margin="0,0,0,10">
+
+        <Label Grid.Row="3" Grid.Column="0" Content="Выберите голос:" FontSize="16" FontWeight="Bold" Margin="0,10,0,0" />
+        <ScrollViewer Grid.Row="4" Grid.Column="0" VerticalScrollBarVisibility="Auto" Margin="0,0,0,10">
             <ComboBox x:Name="voiceComboBox" Margin="0,10,0,10" FontSize="14">
                 <ComboBoxItem Content="Женские голоса" FontWeight="Bold" IsEnabled="False" />
                 <ComboBoxItem Content="alena" Tag="{x:Static local:VoiceOption.alena}" />
@@ -38,19 +43,20 @@
             </ComboBox>
         </ScrollViewer>
 
-        <Label Grid.Row="2" Grid.Column="1" Content="Выберите эмоцию:" FontSize="16" FontWeight="Bold" Margin="0,10,0,0" />
-        <ScrollViewer Grid.Row="3" Grid.Column="1" VerticalScrollBarVisibility="Auto" Margin="0,0,0,10">
+        <Label Grid.Row="3" Grid.Column="1" Content="Выберите эмоцию:" FontSize="16" FontWeight="Bold" Margin="0,10,0,0" />
+        <ScrollViewer Grid.Row="4" Grid.Column="1" VerticalScrollBarVisibility="Auto" Margin="0,0,0,10">
             <ComboBox x:Name="emotionComboBox" Margin="0,10,0,10" FontSize="14">
                 <ComboBoxItem Content="нейтральная" Tag="{x:Static local:EmotionOption.neutral}" />
                 <ComboBoxItem Content="радостная" Tag="{x:Static local:EmotionOption.good}" />
                 <ComboBoxItem Content="раздраженная" Tag="{x:Static local:EmotionOption.evil}" />
             </ComboBox>
         </ScrollViewer>
-        <Button Grid.Row="4" Grid.Column="0" Content="Создать аудиофайлы" x:Name="BtnCreateAudioFiles" Click="BtnCreateAudioFiles_Click" Padding="10,5" Margin="0,10,0,10" FontSize="14" Grid.ColumnSpan="2" Background="#B0C4DE" BorderBrush="#87CEFA" BorderThickness="2" />
-        <Label Grid.Row="5" Grid.Column="0" Content="Прогресс:" FontSize="16" FontWeight="Bold" Margin="0,10,0,0" />
-        <ProgressBar Grid.Row="5" Grid.Column="1" x:Name="progressBar" Margin="0,10,0,10" />
-        <Label Grid.Row="5" Grid.Column="1" x:Name="progressLabel" Content="0%" FontSize="16" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center" />
-        <Label Grid.Row="6" Grid.Column="0" Grid.ColumnSpan="2" x:Name="txtStatus" FontSize="14" FontWeight="Bold" Foreground="Red" HorizontalAlignment="Center" VerticalAlignment="Center" />
+        <Button Grid.Row="5" Grid.Column="0" Content="Создать аудиофайлы" x:Name="BtnCreateAudioFiles" Click="BtnCreateAudioFiles_Click" Padding="10,5" Margin="0,10,0,10" FontSize="14" Background="#B0C4DE" BorderBrush="#87CEFA" BorderThickness="2" />
+        <Button Grid.Row="5" Grid.Column="1" Content="Отмена" x:Name="BtnCancel" Click="BtnCancel_Click" Padding="10,5" Margin="10,10,0,10" FontSize="14" Background="#B0C4DE" BorderBrush="#87CEFA" BorderThickness="2" IsEnabled="False" />
+        <Label Grid.Row="6" Grid.Column="0" Content="Прогресс:" FontSize="16" FontWeight="Bold" Margin="0,0,10,0" HorizontalAlignment="Right"/>
+        <ProgressBar Grid.Row="6" Grid.Column="1" x:Name="progressBar" Margin="0,10,0,10" />
+        <Label Grid.Row="6" Grid.Column="1" x:Name="progressLabel" Content="0%" FontSize="16" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center" />
+        <Label Grid.Row="7" Grid.Column="0" Grid.ColumnSpan="2" x:Name="txtStatus" FontSize="14" FontWeight="Bold" Foreground="Red" HorizontalAlignment="Center" VerticalAlignment="Center" />
         <!--<Label Grid.Row="7" Grid.Column="0" Content="Скорость озвучивания:" FontSize="16" FontWeight="Bold" Margin="0,10,0,0" />-->
         <!--<Slider Grid.Row="7" Grid.Column="1" x:Name="speedSlider" Minimum="0.1" Maximum="3.0" SmallChange="0.25" LargeChange="0.5" Value="1.0" Margin="10,10,0,10" /> -->
         <!--<Label Grid.Row="8" Grid.Column="0" x:Name="speedLabel" Content="{Binding ElementName=speedSlider, Path=Value, StringFormat={}{0:0.00}}" FontSize="14" FontWeight="Bold" Margin="10,10,0,10"/> -->
