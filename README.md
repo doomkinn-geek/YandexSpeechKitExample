@@ -7,7 +7,7 @@
 
 {
   "YandexApi": {
-    "ApiKey": "<<key>>"
+    "ApiKey": "/<key/>"
   }
 }
 
